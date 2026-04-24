@@ -1,0 +1,19 @@
+{
+    "name": "juancecenas/task-manager-api",
+    "description": "Task Manager API in pure PHP with clean architecture",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Juan Cecenas",
+            "email": "juancarlos.cecenasrojas@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}
