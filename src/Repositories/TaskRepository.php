@@ -3,9 +3,10 @@
 namespace App\Repositories;
 
 use App\Core\Database;
+use App\Repositories\Contracts\TaskRepositoryInterface;
 use PDO;
 
-class TaskRepository
+class TaskRepository implements TaskRepositoryInterface
 {
     private PDO $pdo;
 

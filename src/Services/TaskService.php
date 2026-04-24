@@ -2,13 +2,23 @@
 
 namespace App\Services;
 
+use App\Repositories\TaskRepository;
+
 class TaskService
 {
+
+    private TaskRepository $repository;
+
+    public function __construct()
+    {
+        $this->repository = new TaskRepository();
+    }
+
     private array $tasks = [];
 
     public function getAll(): array
     {
-        return $this->tasks;
+        return $this->repository->getAll();
     }
 
     public function create(array $data): array
@@ -23,7 +33,7 @@ class TaskService
             'status' => 'pending'
         ];
 
-        $this->tasks[] = $task;
+        $this->repository->save($task);
 
         return $task;
     }
