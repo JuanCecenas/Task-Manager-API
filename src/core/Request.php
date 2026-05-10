@@ -14,10 +14,14 @@ class Request
     {
         $path = $_SERVER['REQUEST_URI'] ?? '/';
         $position = strpos($path, '?');
-        if ($position === false) {
-            return $path;
+        if ($position !== false) {
+            $path = substr($path, 0, $position);
         }
-        return substr($path, 0, $position);
+        // Strip trailing slash so /health/ matches route /health (except root).
+        if ($path !== '/' && str_ends_with($path, '/')) {
+            $path = rtrim($path, '/') ?: '/';
+        }
+        return $path;
     }
 
     public function getBody() : array

@@ -11,6 +11,17 @@ $request = new Request();
 $response = new Response();
 $router = new Router();
 
+$router->get('/', function ($req, $res) {
+    $res->json([
+        'message' => 'Task Manager API',
+        'endpoints' => [
+            'GET /health' => 'Health check',
+            'GET /tasks' => 'List tasks',
+            'POST /tasks' => 'Create task (JSON body: {"title":"..."})',
+        ],
+    ]);
+});
+
 // Test route
 $router->get('/health', function ($req, $res) {
     $res->json([

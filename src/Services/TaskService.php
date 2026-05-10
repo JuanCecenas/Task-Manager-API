@@ -33,7 +33,7 @@ class TaskService
             'status' => 'pending'
         ];
 
-        $this->repository->save($task);
+        $this->repository->create($task);
 
         return $task;
     }

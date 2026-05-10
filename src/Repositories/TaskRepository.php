@@ -21,7 +21,7 @@ class TaskRepository implements TaskRepositoryInterface
         return $stmt->fetchAll();
     }
 
-    public function save(array $task): array
+    public function create(array $task): array
     {
         $stmt = $this->pdo->prepare("
             INSERT INTO tasks (title, status)
