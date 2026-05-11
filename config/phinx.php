@@ -1,5 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
+require_once dirname(__DIR__) . '/bootstrap/app.php';
+
 return
 [
     'paths' => [
@@ -11,13 +15,13 @@ return
         'default_environment' => 'development',
         'default' => [
             'adapter' => 'mysql',
-            'host' => 'localhost',
-            'name' => 'task_manager',
-            'user' => 'root',
-            'pass' => '',
-            'port' => '3306',
+            'host' => $_ENV['DB_HOST'],
+            'name' => $_ENV['DB_DATABASE'],  
+            'user' => $_ENV['DB_USERNAME'],
+            'pass' => $_ENV['DB_PASSWORD'],
+            'port' => (string) ((int) ($_ENV['DB_PORT'])),
             'charset' => 'utf8',
-        ]
+        ] 
     ],
     'version_order' => 'creation'
 ];
