@@ -32,5 +32,8 @@ $router->get('/health', function ($req, $res) {
 
 $router->get('/tasks', [TaskController::class, 'index']);
 $router->post('/tasks', [TaskController::class, 'store']);
+$router->put('/tasks/{id}', [TaskController::class, 'update']);
+$router->patch('/tasks/{id}', [TaskController::class, 'update']);
+$router->delete('/tasks/{id}', [TaskController::class, 'delete']);
 
 $router->resolve($request, $response);

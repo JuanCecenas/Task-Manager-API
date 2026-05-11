@@ -37,4 +37,14 @@ class TaskService
 
         return $task;
     }
+
+    public function update(int $id, array $data): array
+    {
+        return $this->repository->update($id, $data);
+    }
+
+    public function delete(int $id): bool
+    {
+        return $this->repository->delete($id);
+    }
 }

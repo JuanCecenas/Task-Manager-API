@@ -30,4 +30,23 @@ class TaskController
 
         $response->json($task, 201);
     }
+
+    public function update(Request $request, Response $response): void
+    {
+        $data = $request->getBody();
+        $id = (int) $request->getAttribute('id');
+
+        $task = $this->service->update($id, $data);
+
+        $response->json($task);
+    }
+
+    public function delete(Request $request, Response $response): void
+    {
+        $id = (int) $request->getAttribute('id');
+
+        $deleted = $this->service->delete($id);
+
+        $response->json(['deleted' => $deleted]);
+    }
 }

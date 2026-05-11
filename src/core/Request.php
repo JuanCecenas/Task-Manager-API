@@ -4,6 +4,18 @@ namespace App\Core;
 
 class Request
 {
+    /** @var array<string, mixed> */
+    private array $attributes = [];
+
+    public function setAttribute(string $name, mixed $value): void
+    {
+        $this->attributes[$name] = $value;
+    }
+
+    public function getAttribute(string $name, mixed $default = null): mixed
+    {
+        return $this->attributes[$name] ?? $default;
+    }
 
     public function getMethod()
     {
