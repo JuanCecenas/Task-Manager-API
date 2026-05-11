@@ -7,12 +7,12 @@ require_once dirname(__DIR__) . '/bootstrap/app.php';
 return
 [
     'paths' => [
-        'migrations' => '%%PHINX_CONFIG_DIR%%/db/migrations',
-        'seeds' => '%%PHINX_CONFIG_DIR%%/db/seeds'
+        'migrations' => '%%PHINX_CONFIG_DIR%%/../db/migrations',
+        'seeds' => '%%PHINX_CONFIG_DIR%%/../db/seeds'
     ],
     'environments' => [
-        'default_migration_table' => 'phinxlog',
-        'default_environment' => 'development',
+        'default_migration_table' => 'migrations',
+        'default_environment' => 'default',
         'default' => [
             'adapter' => 'mysql',
             'host' => $_ENV['DB_HOST'],

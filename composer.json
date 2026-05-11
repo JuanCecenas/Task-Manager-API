@@ -18,5 +18,11 @@
     "require": {
         "robmorgan/phinx": "^0.16.11",
         "vlucas/phpdotenv": "^5.6"
+    },
+    "scripts": {
+       "phinx-create": "./vendor/bin/phinx create --configuration=./config/phinx.php ",
+       "phinx-migrate": "./vendor/bin/phinx migrate --configuration=./config/phinx.php",
+       "phinx-rollback": "./vendor/bin/phinx rollback --configuration=./config/phinx.php",
+       "phinx-status": "./vendor/bin/phinx status --configuration=./config/phinx.php"
     }
 }
