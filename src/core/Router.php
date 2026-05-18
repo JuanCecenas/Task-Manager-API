@@ -7,6 +7,9 @@ class Router
     /** @var array<string, array{static: array<string, mixed>, dynamic: list<array{regex: string, names: array<int, string>, callback: mixed}>}> */
     private array $routes = [];
 
+    /** @var callable[] */
+    private array $middleware = [];
+
     public function get(string $path, $callback): void
     {
         $this->addRoute('GET', $path, $callback);
@@ -32,6 +35,16 @@ class Router
         $this->addRoute('DELETE', $path, $callback);
     }
 
+    public function options(string $path, $callback): void
+    {
+        $this->addRoute('OPTIONS', $path, $callback);
+    }
+
+    public function middleware(callable $handler): void
+    {
+        $this->middleware[] = $handler;
+    }
+
     private function addRoute(string $method, string $path, $callback): void
     {
         if (!isset($this->routes[$method])) {
@@ -40,7 +53,6 @@ class Router
 
         if (!str_contains($path, '{')) {
             $this->routes[$method]['static'][$path] = $callback;
-
             return;
         }
 
@@ -81,12 +93,15 @@ class Router
 
     public function resolve(Request $request, Response $response): void
     {
+        foreach ($this->middleware as $handler) {
+            $handler($request, $response);
+        }
+
         $method = $request->getMethod();
         $path = $request->getPath();
 
         if (!isset($this->routes[$method])) {
             $response->json(['error' => 'Not Found'], 404);
-
             return;
         }
 
@@ -107,16 +122,13 @@ class Router
 
         if (!$callback) {
             $response->json(['error' => 'Not Found'], 404);
-
             return;
         }
 
         if (is_array($callback)) {
             $controller = new $callback[0]();
             $methodName = $callback[1];
-
             call_user_func([$controller, $methodName], $request, $response);
-
             return;
         }
 
